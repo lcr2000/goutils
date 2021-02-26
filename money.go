@@ -6,7 +6,7 @@ import (
 	"strconv"
 )
 
-// FenToYuan将金额分转换成元. 返回一个float64类型.
+// FenToYuanFloat将金额分转换成元. 返回一个float64类型.
 func FenToYuanFloat(money int) float64 {
 	if money == 0 {
 		return 0
