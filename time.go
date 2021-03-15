@@ -1,6 +1,7 @@
 package goutils
 
 import (
+	"fmt"
 	"github.com/spf13/cast"
 	"time"
 )
@@ -63,4 +64,33 @@ func IsToday(t int64) bool {
 		return true
 	}
 	return false
+}
+
+// TimeAgo判断传入的时间t是多长时间前.
+func TimeAgo(t time.Time) string {
+	now := time.Now()
+	diff := now.Sub(t)
+	hours := diff.Hours()
+	if hours < 1.0 {
+		return fmt.Sprintf("约 %.0f 分钟前", diff.Minutes())
+	}
+
+	if hours < 24.0 {
+		return fmt.Sprintf("约 %.0f 小时前", hours)
+	}
+
+	if hours < 72.0 {
+		return fmt.Sprintf("约 %.0f 天前", hours/24.0)
+	}
+
+	if now.Year() == t.Year() {
+		return t.Format("01-02 15:04")
+	}
+
+	return t.Format("2006-01-02")
+}
+
+// IsLeap判断年份year是否为闰年.
+func IsLeap(year int) bool {
+	return year%4 == 0 && (year%100 != 0 || year%400 == 0)
 }

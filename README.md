@@ -146,6 +146,18 @@ func IsToday(t int64) bool
 函数`IsToday`判断传入的时间`t`是否为今天。返回参数为`bool`类型。
 
 
+```go
+func TimeAgo(t time.Time) string
+```
+
+函数`TimeAgo`判断传入的时间`t`是多长时间前。
+
+```go
+func IsLeap(year int) bool
+```
+
+函数`IsLeap`判断年份`year`是否为闰年。
+
 
 ### verify
 

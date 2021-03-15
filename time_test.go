@@ -168,3 +168,68 @@ func TestIsYesterday(t *testing.T) {
 		})
 	}
 }
+
+func TestTimeAgo(t *testing.T) {
+	m, _ := time.ParseDuration("-1m")
+	h, _ := time.ParseDuration("-1h")
+
+	type args struct {
+		t time.Time
+	}
+	tests := []struct {
+		name string
+		args args
+	}{
+		{
+			name: "case1",
+			args: args{t: time.Now().AddDate(0, 0, -2)},
+		},
+		{
+			name: "case2",
+			args: args{t: time.Now().Add(m)},
+		},
+		{
+			name: "case3",
+			args: args{t: time.Now().Add(h)},
+		},
+		{
+			name: "case4",
+			args: args{t: time.Now()},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := TimeAgo(tt.args.t)
+			t.Log(got)
+		})
+	}
+}
+
+func TestIsLeap(t *testing.T) {
+	type args struct {
+		year int
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{
+			name: "case1",
+			args: args{year: 2021},
+			want: false,
+		},
+		{
+			name: "case1",
+			args: args{year: 2020},
+			want: true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := IsLeap(tt.args.year); got != tt.want {
+				t.Errorf("IsLeap() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
